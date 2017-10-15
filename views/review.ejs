@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport"
+	      content="width=device-width,height=device-height,inital-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>
+		<%=title %>
+	</title>
+	<style type="text/css">
+		body {
+			background: #fff;
+		}
+
+		a {
+			text-decoration: none;
+			color: #3498db;
+		}
+
+		button {
+			color: #f00;
+			border: none;
+			background: transparent;
+			cursor: pointer;
+			outline: 0;
+		}
+		.btn {
+			width: 32%;
+			display: inline-block;
+			text-align: center;
+		}
+	</style>
+	<script type="application/javascript">
+         function onDeleteClick(path, next) {
+             if (confirm('是否删除?')) {
+                 if (path.indexOf('?') != -1) {
+                     path = path.substring(0, path.indexOf('?'));
+                 }
+                 window.location.href = path + '?action=delete&nexturl=' + next;
+             }
+         }
+     </script>
+</head>
+
+<body>
+<div>
+	<img style="width: 100%" src="<%=path %>" onclick="window.location.href='<%=next %>'"/>
+</div>
+<div style="margin-top: 10px; margin-bottom: 30px;">
+	<a class="btn" href="<%=parent %>">返回</a>
+	<a class="btn" href="<%=last %>">上一个</a>
+	<a class="btn" href="<%=next %>">下一个</a>
+</div>
+<div style="margin-top: 60px; margin-bottom: 30px; text-align: center;">
+	<button style="font-size: 14px;" onclick="onDeleteClick('<%=path %>', '<%=next %>')">删除</button>
+</div>
+</body>
+
+</html>

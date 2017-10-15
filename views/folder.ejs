@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport"
+	      content="width=device-width,height=device-height,inital-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>
+		<%=title %>
+	</title>
+	<style type="text/css">
+		body {
+			background: #fff;
+		}
+
+		a {
+			text-decoration: none;
+			color: #3498db;
+		}
+
+		button {
+			color: #f00;
+			border: none;
+			background: transparent;
+			cursor: pointer;
+			outline: 0;
+		}
+
+		#header {
+			padding: 5px;
+			font-size: 20px;
+			border-bottom: 2px solid #3498db;
+		}
+
+		#content {
+			padding: 5px;
+		}
+
+		.item {
+			padding: 10px 5px;
+			border-bottom: 1px solid #ddd;
+			font-size: 18px;
+		}
+
+		.file {
+			display: inline-block;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			max-width: 85%;
+		}
+
+		.delete {
+			float: right;
+		}
+	</style>
+	<script type="application/javascript">
+		function onDeleteClick(name, path) {
+			if (confirm('是否删除[' + name + ']?')) {
+				if (path.indexOf('?') != -1) {
+					path = path.substring(0, path.indexOf('?'));
+				}
+				window.location.href = path + '?action=delete';
+			}
+		}
+	</script>
+</head>
+
+<body>
+<div id="header"><%=title %></div>
+<div id="content">
+	<%for (var i = 0; i < files.length; i++) { %>
+	<div class="item">
+		<div class="file"><a href="<%=files[i].path %>"><%=files[i].name %></a></div>
+		<div class="delete">
+			<button onclick="onDeleteClick('<%=files[i].name %>', '<%=files[i].path %>')">删除</button>
+		</div>
+	</div>
+	<%} %>
+</div>
+</body>
+
+</html>
