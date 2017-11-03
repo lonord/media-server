@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var file = require('./routes/file');
+var createFileService = require('./routes/file');
+var config = require('./config.json')
 
 var app = express();
 
@@ -23,9 +24,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(file);
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/thunder', express.static('/root/thunder'));
+for (var i = 0; i < config['file-serve'].length; i++) {
+  var fileServe = config['file-serve'][i];
+  var mountPath = fileServe.mountPath;
+  var fsPath = fileServe.fsPath;
+  if (mountPath.indexOf('/') !== 0) {
+    mountPath = '/' + mountPath;
+  }
+  if (fsPath.indexOf('/') !== 0) {
+    fsPath = path.join(__dirname, fsPath);
+  }
+  app.use(mountPath, createFileService(fsPath));
+}
 
 app.use('/', routes);
 

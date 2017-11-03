@@ -11,6 +11,7 @@
 	<style type="text/css">
 		body {
 			background: #fff;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
 		}
 
 		a {
@@ -72,9 +73,11 @@
 	<%for (var i = 0; i < files.length; i++) { %>
 	<div class="item">
 		<div class="file"><a href="<%=files[i].path %>"><%=files[i].name %></a></div>
-		<div class="delete">
-			<button onclick="onDeleteClick('<%=files[i].name %>', '<%=files[i].path %>')">删除</button>
-		</div>
+		<%if (!files[i].isBackParent) {%>
+			<div class="delete">
+				<button onclick="onDeleteClick('<%=files[i].name %>', '<%=files[i].path %>')">删除</button>
+			</div>
+		<%} %>
 	</div>
 	<%} %>
 </div>

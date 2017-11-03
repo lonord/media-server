@@ -1,0 +1,8 @@
+{
+	"file-serve": [
+		{
+			"fsPath": "/root/downloads",
+			"mountPath": "/downloads"
+		}
+	]
+}
